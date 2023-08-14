@@ -1,22 +1,11 @@
-
-# Python Code for Implementation and running time Algorithm
-# Complexity plot of Merge and Quick Sort
-
-# This python code intends to implement Merge and quick Sort Algorithm
-# Plots its time Complexity on list of different sizes
-
-# ---------------------Important Note -------------------
-# numpy, time and matplotlib.pyplot are required to run this code
 import time
 from numpy.random import seed
 from numpy.random import randint
 import matplotlib.pyplot as plt
 
 # MergeSort in Python
-
 def mergeSort(array):
     if len(array) > 1:
-
         #  r is the point where the array is divided into two subarrays
         r = len(array)//2
         L = array[:r]
@@ -163,7 +152,7 @@ elements = list()
 times = list()
 global labeldata
 print("1. Merge sort 2. Quick Sort 3. Selection Sort")
-ch=int(input("Enter the Choice"))
+ch=int(input("Enter the Choice: "))
 if (ch == 1):
    array=read_Input()
    mergeSort(array)
@@ -176,9 +165,8 @@ elif(ch==2):
    labeldata="QuickSort"
    quickSort(array,0, size-1)
    print('Sorted Array is:')
-   print(array)
-  
-if (ch == 3):
+   print(array) 
+elif (ch == 3):
   array=read_Input()
   size = len(array)
   labeldata="SelectionSort"
@@ -187,26 +175,17 @@ if (ch == 3):
   print(array)
 print("******************Running Time Analysis******************* ")
 for i in range(1, 10):
-
-    # generate some integers
     array = randint(0, 1000 * i, 1000 * i)
-    # print(i)
     start = time.time()
-    
     if ch==1:
        mergeSort(array)
-
     elif ch==2:
         size=len(array)
         quickSort(array, 0, size - 1)
     else:
         size=len(array)
         selectionSort(array,size)
-
-       # mergeSort(array)
     end = time.time()
-
-    # print("Sorted list is ", a)
     print(len(array), "Elements Sorted by", labeldata,end-start)
     elements.append(len(array))
     times.append(end-start)
@@ -221,14 +200,33 @@ plt.show()
 1. Merge sort 2. Quick Sort 3. Selection Sort
 enter the number of viewers
 Sorted Array is:
-[100, 200, 300, 400, 500]
+[460, 480, 560, 800, 1800]
 ******************Running Time Analysis******************* 
-1000 Elements Sorted by MergeSort 0.005581855773925781
-2000 Elements Sorted by MergeSort 0.009851455688476562
-3000 Elements Sorted by MergeSort 0.016305208206176758
-4000 Elements Sorted by MergeSort 0.02277541160583496
-5000 Elements Sorted by MergeSort 0.03175640106201172
-6000 Elements Sorted by MergeSort 0.033538818359375
-7000 Elements Sorted by MergeSort 0.04492044448852539
-8000 Elements Sorted by MergeSort 0.047418832778930664
-9000 Elements Sorted by MergeSort 0.05614042282104492
+1000 Elements Sorted by SelectionSort 0.09568953514099121
+2000 Elements Sorted by SelectionSort 0.3712890148162842
+3000 Elements Sorted by SelectionSort 0.8253390789031982
+4000 Elements Sorted by SelectionSort 1.3932836055755615
+5000 Elements Sorted by SelectionSort 2.1737754344940186
+6000 Elements Sorted by SelectionSort 3.278183937072754
+7000 Elements Sorted by SelectionSort 4.478109836578369
+8000 Elements Sorted by SelectionSort 5.8997886180877686
+9000 Elements Sorted by SelectionSort 7.413802146911621
+
+OUTPUT
+1. Merge sort 2. Quick Sort 3. Selection Sort
+Enter the Choice: 1
+Enter the number of TV Channels: 5
+enter the number of viewers
+460 480 560 800 1800
+Sorted Array is:
+[460, 480, 560, 800, 1800]
+******************Running Time Analysis******************* 
+1000 Elements Sorted by SelectionSort 0.09568953514099121
+2000 Elements Sorted by SelectionSort 0.3712890148162842
+3000 Elements Sorted by SelectionSort 0.8253390789031982
+4000 Elements Sorted by SelectionSort 1.3932836055755615
+5000 Elements Sorted by SelectionSort 2.1737754344940186
+6000 Elements Sorted by SelectionSort 3.278183937072754
+7000 Elements Sorted by SelectionSort 4.478109836578369
+8000 Elements Sorted by SelectionSort 5.8997886180877686
+9000 Elements Sorted by SelectionSort 7.413802146911621
