@@ -1,21 +1,24 @@
-import numpy as np
-from scipy.optimize import linear_sum_assignment
-def solve_assignment(cost_matrix):
-row_ind, col_ind = linear_sum_assignment(cost_matrix) 
-total_cost = cost_matrix[row_ind, col_ind].sum() 
-assignment = list(zip(row_ind, col_ind))
-return total_cost, assignment
-def main():
-n = int(input("Enter the number of workers/tasks: ")) 
-cost_matrix = np.zeros((n, n))
-print("Enter the cost matrix:") 
-for i in range(n):
-row = list(map(int, input().split())) 
-cost_matrix[i] = row
-total_cost, assignment = solve_assignment(cost_matrix)
-print("Optimal assignment:") 
-for worker, task in assignment:
-print(f"Worker {worker} assigned to Task {task}")
-print("Total cost:", total_cost)
-if name == " main ": 
-main()
+def optimal_bst(keys, freq):
+    n = len(keys)
+    dp = [[0] * (n + 1) for _ in range(n + 1)]
+
+    for i in range(n):
+        dp[i][i + 1] = freq[i]
+        
+    for length in range(2, n + 1):
+        for i in range(n - length + 2):
+            j = i + length - 1
+            dp[i][j] = float('inf')
+            for r in range(i, j + 1):
+                cost = sum(freq[i:j + 1]) + (dp[i][r - 1] if r > i else 0) + (dp[r + 1][j] if r < j else 0)
+                if cost < dp[i][j]:
+                    dp[i][j] = cost
+    
+    return dp[0][n - 1]
+
+# Example usage
+keys = [10, 12, 20, 40]
+freq = [34, 8, 50, 23]
+
+result = optimal_bst(keys, freq)
+print("Minimum expected cost:", result)
