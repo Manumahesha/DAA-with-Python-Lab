@@ -1,24 +1,47 @@
-def optimal_bst(keys, freq):
-    n = len(keys)
-    dp = [[0] * (n + 1) for _ in range(n + 1)]
+/* findMinCost uses Least() and Add() to maintain the
+   list of live nodes
 
-    for i in range(n):
-        dp[i][i + 1] = freq[i]
-        
-    for length in range(2, n + 1):
-        for i in range(n - length + 2):
-            j = i + length - 1
-            dp[i][j] = float('inf')
-            for r in range(i, j + 1):
-                cost = sum(freq[i:j + 1]) + (dp[i][r - 1] if r > i else 0) + (dp[r + 1][j] if r < j else 0)
-                if cost < dp[i][j]:
-                    dp[i][j] = cost
-    
-    return dp[0][n - 1]
+   Least() finds a live node with least cost, deletes
+   it from the list and returns it
 
-# Example usage
-keys = [10, 12, 20, 40]
-freq = [34, 8, 50, 23]
+   Add(x) calculates cost of x and adds it to the list
+   of live nodes
 
-result = optimal_bst(keys, freq)
-print("Minimum expected cost:", result)
+   Implements list of live nodes as a min heap */
+
+
+// Search Space Tree Node
+node
+{
+   int job_number;
+   int worker_number;
+   node parent;
+   int cost;
+}
+
+// Input: Cost Matrix of Job Assignment problem
+// Output: Optimal cost and Assignment of Jobs
+algorithm findMinCost (costMatrix mat[][])
+{
+   // Initialize list of live nodes(min-Heap)
+   // with root of search tree i.e. a Dummy node
+   while (true)
+   {
+      // Find a live node with least estimated cost
+      E = Least();
+
+      // The found node is deleted from the list
+      // of live nodes
+      if (E is a leaf node)
+      {
+         printSolution();
+         return;
+      }
+
+     for each child x of E
+     {
+         Add(x); // Add x to list of live nodes;
+         x->parent = E; // Pointer for path to root
+     }
+   }
+}
