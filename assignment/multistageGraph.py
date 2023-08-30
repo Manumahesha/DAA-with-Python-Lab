@@ -1,39 +1,38 @@
-def multistage_graph(graph, stages): 
-n = len(graph)
-cost = [float('inf')] * n 
-parent = [0] * n
-cost[n - 1] = 0
-for i in range(n - 2, -1, -1): 
-for j in range(n):
-if graph[i][j] != float('inf'):
-if cost[i] > graph[i][j] + cost[j]: 
-cost[i] = graph[i][j] + cost[j] 
-parent[i] = j
-path = [0]
-current_stage = 0
-while current_stage < len(stages) - 1: 
-next_stage = stages[current_stage + 1] 
-next_node = parent[path[-1]]
-while next_node < next_stage: 
-path.append(next_node) 
-next_node = parent[next_node]
-current_stage += 1
-path.append(n - 1) 
-return path, cost[0]
+import networkx as nx
+
+def create_multistage_graph():
+    G = nx.DiGraph()
+    
+    num_stages = int(input("Enter the number of stages: "))
+    num_vertices = 0
+    
+    for stage in range(1, num_stages + 1):
+        num_vertices_in_stage = int(input(f"Enter the number of vertices in stage {stage}: "))
+        
+        for _ in range(num_vertices_in_stage):
+            G.add_node(num_vertices)
+            num_vertices += 1
+            
+            if stage > 1:
+                for prev_vertex in G.nodes:
+                    if G.nodes[prev_vertex]['stage'] == stage - 1:
+                        weight = int(input(f"Enter the weight between vertex {prev_vertex} and vertex {num_vertices}: "))
+                        G.add_edge(prev_vertex, num_vertices, weight=weight)
+                        
+        for vertex in G.nodes:
+            G.nodes[vertex]['stage'] = stage
+            
+    return G
+
+def find_optimal_path(G):
+    optimal_path = nx.shortest_path(G, source=0, target=G.number_of_nodes() - 1, weight='weight')
+    return optimal_path
+
 def main():
-n = int(input("Enter the number of nodes: ")) 
-graph = [[float('inf')] * n for _ in range(n)]
-for i in range(n):
-neighbors = list(map(float, input(f"Enter distances for neighbors of node {i}: ").split())) 
-for j, distance in enumerate(neighbors):
-graph[i][j] = distance
-num_stages = int(input("Enter the number of stages: "))
-stages = list(map(int, input("Enter the number of nodes in each stage: ").split()))
-if stages[0] != 1 or stages[-1] != 1:
-print("First and last stages must have only one node.") 
-return
-path, min_cost = multistage_graph(graph, stages) 
-print("Shortest path:", " -> ".join(map(str, path))) 
-print("Minimum cost:", min_cost)
-if name == " main ": 
-main()
+    multistage_graph = create_multistage_graph()
+    optimal_path = find_optimal_path(multistage_graph)
+    
+    print("Optimal Path:", optimal_path)
+
+if _name_ == "_main_":
+    main()
