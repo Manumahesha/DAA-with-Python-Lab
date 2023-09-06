@@ -27,3 +27,24 @@ if __name__ =='__main__':
         jobs.append(Job(taskId, deadline, profit))
     T = int(input("Enter the total time: "))
     schedulejobs(jobs, T)
+
+'''Output
+Enter the number of jobs: 5
+Enter task ID for job 1: 1
+Enter deadline for job 1: 2
+Enter profit for job 1: 20
+Enter task ID for job 2: 2
+Enter deadline for job 2: 2
+Enter profit for job 2: 15
+Enter task ID for job 3: 3
+Enter deadline for job 3: 1
+Enter profit for job 3: 10
+Enter task ID for job 4: 4
+Enter deadline for job 4: 3
+Enter profit for job 4: 5
+Enter task ID for job 5: 5
+Enter deadline for job 5: 3
+Enter profit for job 5: 1
+Enter the total time: 5
+The scheduled jobs are ['2', '1', '4']'''
+The total profit earned is 40
