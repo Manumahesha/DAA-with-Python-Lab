@@ -59,3 +59,17 @@ if optimal_route is None:
     print("No valid route exists from the start to the destination.")
 else:
     print("Optimal Route:", ' -> '.join(optimal_route))
+
+'''Output
+Enter the number of edges in the graph: 
+Enter the edges in the format 'node1 node2 weight':
+A B 3
+B C 4
+C E 6
+A D 7
+D E 4
+D C 5
+B D 2
+Enter the start node: A
+Enter the destination node: E
+Optimal Route: A -> B -> D -> E'''
