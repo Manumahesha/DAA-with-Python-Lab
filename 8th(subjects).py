@@ -48,7 +48,8 @@ graph.add_edge('Physics', 'Biology')
 minimun_time_slots = graph.get_minimum_time_slots()
 print(f"Minimum time slots required: {minimun_time_slots}")
 
-/*Enter the subjects: Math Physics Chemistry Biology
+'''Output
+Enter the subjects: Math Physics Chemistry Biology
 Enter the name of students in Math: Alice Bob Charlie
 Enter the name of students in Physics: Alice Charlie David
 Enter the name of students in Chemistry: Bob Charlie Eve
@@ -63,4 +64,4 @@ Enter the edges [0 1]:
 0 2
 1 2
 1 3
-Minimum time slots required: 3/*
+Minimum time slots required: 3'''
